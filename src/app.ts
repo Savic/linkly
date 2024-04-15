@@ -1,18 +1,24 @@
 import express from "express";
 import bodyParser from "body-parser";
-
-import {AppDataSource} from "./database/source";
+import path from "path";
 
 import linkRouter from "./api/link.router";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+app.use(express.static("public"));
+
 // Middleware
 app.use(bodyParser.json());
 
 // Use the router
 app.use("/api", linkRouter);
+
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Start the server
 async function startServer() {

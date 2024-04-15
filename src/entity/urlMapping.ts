@@ -17,4 +17,10 @@ export class UrlMapping {
         nullable: false,
     })
     shortId!: string;
+
+    @Column({default: false})
+    isArchived!: boolean;
+
+    @Column({type: "timestamp", nullable: true})
+    archivedAt!: Date;
 }

@@ -1,6 +1,6 @@
 // src/data-source.ts
 import {DataSource, ConnectionOptions} from "typeorm";
-import {UrlMapping} from "./../entity/urlMapping";
+import {UrlMapping} from "../entity/urlMapping";
 
 export class AppDataSource {
     private static connection: DataSource;

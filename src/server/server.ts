@@ -4,27 +4,31 @@ import path from "path";
 
 import linkRouter from "./api/link.router";
 
-const app = express();
+const server = express();
 const port = process.env.PORT || 3000;
 
 
-app.use(express.static("public"));
+server.use(express.static("public", {
+    setHeaders: (res) => {
+        // TODO: Set prod env things
+        // res.setHeader("Cache-Control", "public, max-age=31557600")
+    }
+}));
 
 // Middleware
-app.use(bodyParser.json());
+server.use(bodyParser.json());
 
 // Use the router
-app.use("/api", linkRouter);
+server.use("/api", linkRouter);
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+server.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 // Start the server
 async function startServer() {
     try {
-
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
         });
     } catch (error) {

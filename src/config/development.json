@@ -1,0 +1,20 @@
+{
+  "DB": {
+    "host": "localhost",
+    "username": "postgres",
+    "password": "",
+    "type": "postgres",
+    "port": 5432,
+    "database": "linkly",
+    "synchronize": true,
+    "logging": false
+  },
+  "Mailtrap": {
+    "api": {
+      "token": "84815e32cdc4d74effa7184e5e6a23ba"
+    },
+    "mail": {
+      "sender": "noreply@linkly.space"
+    }
+  }
+}

@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import path from "path";
 
 import linkRouter from "./api/link.router";
+import {AppDataSource} from "./database/source";
 
 const server = express();
 const port = process.env.PORT || 3000;
@@ -28,6 +29,10 @@ server.get("/", function (req, res) {
 // Start the server
 async function startServer() {
     try {
+        /* Open the database connection */
+        await AppDataSource.getConnection().initialize();
+
+        /* Listen to the port */
         server.listen(port, () => {
             console.log(`Server started at http://localhost:${port}`);
         });

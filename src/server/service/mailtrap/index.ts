@@ -1,3 +1,5 @@
+import config from "config";
+import {MailtrapConfig} from "../../../config/types";
 import {MailtrapClient, SendResponse} from "mailtrap";
 
 /**
@@ -7,11 +9,10 @@ import {MailtrapClient, SendResponse} from "mailtrap";
 class EmailService {
     private static instance: EmailService;
     private client: MailtrapClient;
+    private readonly mailConfig: MailtrapConfig = config.get<MailtrapConfig>("Mailtrap");
 
     private constructor() {
-        const token = "84815e32cdc4d74effa7184e5e6a23ba";
-
-        this.client = new MailtrapClient({token});
+        this.client = new MailtrapClient({token: this.mailConfig.api.token });
     }
 
     static getInstance(): EmailService {
@@ -40,7 +41,7 @@ class EmailService {
         recipientName: string
     ): Promise<SendResponse> {
         const sender = {
-            email: "mailtrap@linkly.space",
+            email: this.mailConfig.mail.sender,
             name: recipientName,
         };
 
